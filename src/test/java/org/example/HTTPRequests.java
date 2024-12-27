@@ -12,10 +12,11 @@ import java.util.HashMap;
 
 public class HTTPRequests {
   int  id;
-    @Test(priority=1)
-    void getUsers() {
-                given()
 
+    @Test(priority=1)
+    void getUsers()
+    {
+                given()
                 .when()
                     .get("https://reqres.in/api/users?page=2")
 
@@ -28,7 +29,7 @@ public class HTTPRequests {
 
     @Test(priority=2)
 void createUser()
-{
+    {
     HashMap data=new HashMap();
     data.put("name", "krithi");
     data.put("job", "QA");
@@ -42,9 +43,10 @@ void createUser()
                     .jsonPath().getInt("id");
 
 
-}
+    }
     @Test(priority=3, dependsOnMethods ={"createUser"} )
-void updateUser(){
+void updateUser()
+    {
 
         HashMap data=new HashMap();
         data.put("name", "Pranav");
@@ -63,9 +65,11 @@ void updateUser(){
                      .log().all();
 
 
-}
-    @Test(priority=4)
-void deleteUser(){
+    }
+
+@Test(priority=4, dependsOnMethods ={"createUser"} )
+    void deleteUser()
+    {
 
                  given()
 
@@ -75,6 +79,6 @@ void deleteUser(){
                 .then()
                      .statusCode(204)
                      .log().all();
-}
+    }
 
 }
